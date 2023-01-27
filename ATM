@@ -1,0 +1,141 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
+
+void tyhjenna(void)
+{
+    while( getc(stdin) != '\n');
+}
+double NostettavaSumma(){
+    int nosto;
+    int seteli50=0, seteli20=0;
+    printf("Nosto voi olla enintaan 1000 euroa eika se voi olla 10 tai 30 euroa!\n\n");
+    printf("syota nostettava summa\n");
+    scanf("%d", &nosto);
+    if((nosto/10)%2==1){
+        nosto=nosto-50;
+        seteli50=seteli50+1;
+    }
+    while(nosto%50==1 && nosto>=100)
+    {
+        nosto=nosto-50;
+        seteli50=seteli50+1;
+
+    }
+    while(nosto/20)
+    {
+        nosto=nosto-20;
+        seteli20=seteli20+1;
+    }
+    while (seteli20>=5){
+        seteli20=seteli20-5;
+        seteli50=seteli50+2;
+        }
+    nosto=seteli50*50+seteli20*20;
+
+    printf("Nostit summan %d joten saat %d 50 euron setelia seka %d 20 euron setelia",nosto,seteli50, seteli20);
+    return nosto;
+}
+void saldo(double kokonaisSaldo){
+     printf("saldosi on %.2f euroa", kokonaisSaldo);
+      }
+void kuitti()
+{
+    int historia;
+    printf("Haluatko tapahtumahistorian\n 1.naytolle          2.kuitille\n");
+    scanf("%d", &historia);
+    if (historia<=1)
+    printf("-2000e bitcoinilla kuuhun\n");
+    else
+    printf("ota kuitti ole hyva\n");
+}
+void lopetus()
+{
+    printf("Ota kortti\n");
+    printf("Kiitos kaynnista tervetuloa uudelleen\n");
+}
+int main()
+
+{
+ FILE *txt;
+ int Valinta, historia, k, Nosto;
+ char tapahtuma, y, n;
+ char tilinumero[1234];
+ int pin;
+ double kokonaisSaldo=10000;
+ char checkpin;
+ printf("anna tilinumero ");
+ fgets(tilinumero,1234,stdin);
+ if (tilinumero[strlen(tilinumero)-1] == '\n')
+     tilinumero[strlen(tilinumero)-1] = '\0';
+ else
+     tyhjenna();
+
+
+        printf("anna pin");
+        scanf("%d", &pin);
+
+
+   	while (pin<1000)
+
+	{
+
+		if (pin =! 1234)
+
+		printf("Virheellinen pin\n");
+
+	}
+	do
+    {
+        printf("Valitse\n");
+
+		printf("1. Saldo\n");
+
+		printf("2. Nosto\n");
+
+		printf("3. Tapahtumat\n");
+
+		printf("4. Lopeta\n");
+
+		printf("*********************************************\n\n");
+
+		printf("Syota valinta: ");
+
+		scanf("%d", &Valinta);
+
+		switch (Valinta)
+		{
+         case 1:
+                saldo(kokonaisSaldo);
+                break;
+
+        case 2:
+                kokonaisSaldo-=NostettavaSumma();
+                break;
+
+        case 3:
+               kuitti();
+                break;
+
+        case 4:
+               lopetus();
+               break;
+
+        default:
+                printf("vaara valinta\n");
+
+		}
+
+        printf("\n\n\n Haluatko suorittaa uuden tapahtuman y/n?\n");
+        fflush(stdin);
+        scanf("%c", &tapahtuma);
+        if (tapahtuma == 'n'|| tapahtuma == 'N')
+          k = 1;
+
+	} while (!k);
+
+	printf("\n\n Kiitos kaynnista tervetuloa uudelleen");
+
+  return (0);
+}
